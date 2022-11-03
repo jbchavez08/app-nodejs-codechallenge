@@ -19,23 +19,7 @@ import { TransactionModule } from './transaction/transaction.module';
       autoLoadEntities: true,
       synchronize: true
     }),
-
-    
-    /*ClientsModule.register([
-      {
-        name: 'AUTH_SERVICE',
-        transport: Transport.KAFKA,
-        options: {
-          client: {
-            clientId: 'auth',
-            brokers: ['localhost:9092'],
-          },
-          consumer: {
-            groupId: 'antifraud-consumer',
-          },
-        },
-      },
-    ]),*/
+   
   ],
   controllers: [],
   providers: [],

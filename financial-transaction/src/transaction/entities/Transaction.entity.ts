@@ -1,4 +1,5 @@
-import {Entity, PrimaryGeneratedColumn, Column} from 'typeorm'
+import {Entity, PrimaryGeneratedColumn, Column, Generated, CreateDateColumn} from 'typeorm'
+import {v4 as uuid} from 'uuid';
 
 @Entity()
 export class TransactionDb {
@@ -6,7 +7,9 @@ export class TransactionDb {
     @PrimaryGeneratedColumn('uuid')
     id: string;
 
-    @Column('text')
+    @Column('text',{
+        default: 'PENDING'
+    })
     status: string;
 
     @Column('numeric',{
@@ -15,22 +18,24 @@ export class TransactionDb {
     amount: number;
     
     @Column('text')
+    @Generated('uuid')
     accountExternalIdDebit: string;
     
     @Column('text')
+    @Generated('uuid')
     accountExternalIdCredit: string;
     
-    @Column('numeric')
+    @Column('numeric',{
+        default: 1
+    })
     tranferTypeId: number;
     
     @Column('numeric', {
         default: 0
     })
     value: number;
-    
-    @Column('numeric', {
-        default: new Date().getTime()
-    })
-    createdAt: number;
+
+    @CreateDateColumn()
+    createdAt: Date;
 
 }

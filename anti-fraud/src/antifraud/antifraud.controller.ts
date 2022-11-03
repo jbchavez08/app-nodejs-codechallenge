@@ -1,12 +1,12 @@
 import { Controller } from '@nestjs/common';
-import { EventPattern } from '@nestjs/microservices';
+import { MessagePattern } from '@nestjs/microservices';
 
 @Controller('antifraud')
 export class AntifraudController {
 
-    @EventPattern('order_created')
-    handleOrderCreated(data: any) {
-        //this.appService.handleOrderCreated(data.value);
+    @MessagePattern('send_antifraud')
+    getAntifraud(data: any) {
+        console.log(data.value + JSON.stringify(data.value));
+        return 'APPROVED';
     }
-
 }

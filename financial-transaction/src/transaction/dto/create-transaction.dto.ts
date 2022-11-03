@@ -1,20 +1,14 @@
-import { IsString, IsDecimal} from "class-validator";
+import { IsString, IsDecimal, IsUUID} from "class-validator";
 
 export class CreateTransactionDto {
 
-    //@IsString()
-    //readonly id: string;
 
     @IsString()
-    readonly status: string;
-    
-    @IsDecimal()
-    readonly amount: number;
-
-    @IsString()
+    @IsUUID()
     readonly accountExternalIdDebit: string;
 
     @IsString()
+    @IsUUID()
     readonly accountExternalIdCredit: string;
 
     @IsDecimal()
