@@ -43,9 +43,14 @@ $ yarn start:dev
 
 ## Images
 
-Postman
+Postman / Request
 <p align="left">
   <img src="./img/postman.png" width="700" />
+</p>
+
+Postman / Response
+<p align="left">
+  <img src="./img/postman2.png" width="700" />
 </p>
 
 
