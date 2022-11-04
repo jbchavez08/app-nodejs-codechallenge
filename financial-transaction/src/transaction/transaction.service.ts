@@ -21,13 +21,17 @@ export class TransactionService {
         @Inject('ANTIFRAUD_SERVICE') private readonly antiFraudClient: ClientKafka,    
     ){}
 
-    
+    /**
+     * Method create on database, and send to service AntiFroud, then update status
+     * @param createTransactionDto CreateTransactionDto
+     * @returns TransactionRepsonseDto
+     */
     async create(createTransactionDto: CreateTransactionDto) {
         try {
             const transx = this.transactionDbRepository.create(createTransactionDto);
             await this.transactionDbRepository.save(transx);
 
-            this.handleAntiFraud(new AntifraudEvent(transx.status, transx.id))
+            this.handleAntiFraud(new AntifraudEvent(transx.status, transx.id, transx.value))
             return new TransactionRepsonseDto(transx.id,
                                                 transx.value, 
                                                 transx.createdAt,
@@ -58,9 +62,9 @@ export class TransactionService {
      * Send to Anti Fraud service for validate amount (value)
      * @param antifraudEvent AntifraudEvent
      */
-    handleAntiFraud(antifraudEvent: AntifraudEvent) {
+    private handleAntiFraud(antifraudEvent: AntifraudEvent) {
     this.antiFraudClient
-        .send('send_antifraud', new GetAntifraudRequestDto(antifraudEvent.id, 1))
+        .send('send_antifraud', antifraudEvent.value)
         .subscribe((antifraud) => {
             this.updateStatusById(antifraudEvent.id, antifraud);
             console.log(`transaction ID ${antifraud} with status ${antifraudEvent.status}...`,);

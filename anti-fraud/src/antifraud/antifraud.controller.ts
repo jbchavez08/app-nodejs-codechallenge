@@ -5,8 +5,8 @@ import { MessagePattern } from '@nestjs/microservices';
 export class AntifraudController {
 
     @MessagePattern('send_antifraud')
-    getAntifraud(data: any) {
-        console.log(data.value + JSON.stringify(data.value));
-        return 'APPROVED';
+    getAntifraud(value: number) {
+        console.log('value is '+value);
+        return value>1000 ? 'REJECTED' : 'APPROVED';
     }
 }

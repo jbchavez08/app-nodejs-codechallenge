@@ -1,7 +1,6 @@
-import { Controller, Get, Post, Patch, Delete, Body, Param, ParseUUIDPipe, ValidationPipe, Inject} from '@nestjs/common';
+import { Controller, Post, Body, Inject} from '@nestjs/common';
 import { TransactionService } from './transaction.service';
 import { CreateTransactionDto } from './dto/create-transaction.dto';
-import { UpdateTransactionDto } from './dto/update-transaction.dto';
 
 import { ClientKafka, EventPattern } from '@nestjs/microservices';
 
